@@ -38,7 +38,7 @@ jspm_packages/
 !/project.json
 .terragrunt*
 /test-reports
-!/Dockerfile
+**/Dockerfile
 
 # Local .terraform directories
 **/.terraform/*
