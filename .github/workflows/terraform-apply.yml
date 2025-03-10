@@ -2,9 +2,11 @@ name: Terraform Apply
 
 on:
   push:
+    paths:
+      - 'terraform/**'
     
 jobs:
-  terraform:
+  terraform-apply:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,10 +24,6 @@ jobs:
         working-directory: terraform
         run: |
             aws s3 cp s3://threat-composer-project/terraform.tfvars ./
-        
-      - name: Print terraform.tfvars
-        working-directory: terraform
-        run: cat terraform.tfvars
         
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
