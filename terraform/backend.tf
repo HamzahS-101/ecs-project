@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = var.bucket_name
+    bucket = "threat-composer-project"
     key = "terraform.tfstate"
-    region = var.region
+    region = "eu-west-2"
     }
 }
