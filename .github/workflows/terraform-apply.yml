@@ -20,7 +20,7 @@ jobs:
 
       - name: Download terraform.tfvars from S3
         run: |
-          aws s3 cp s3://threat-composer-project/terraform.tfvars terraform/terraform.tfvars
+          aws s3 cp s3://threat-composer-project/terraform.tfvars terraform/
         working-directory: terraform
 
       - name: Setup Terraform
