@@ -17,3 +17,11 @@ output "private_subnet_1_id" {
 output "private_subnet_2_id" {
   value = aws_subnet.private_subnet_2.id
 }
+
+output "alb_sg_id" {
+  value = aws_security_group.alb_sg.id
+}
+
+output "container_sg_id" {
+  value = aws_security_group.container_sg.id
+}

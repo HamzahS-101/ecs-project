@@ -12,22 +12,18 @@ module "vpc" {
   private_subnet_2_cidr = var.private_subnet_2_cidr
   availability_zone_a = var.availability_zone_a
   availability_zone_b = var.availability_zone_b
-}
-
-module "security_groups" {
-  source                   = "./modules/security_groups"
   alb_sg_name              = var.alb_sg_name
   alb_sg_description       = var.alb_sg_description
   container_sg_name        = var.container_sg_name
   container_sg_description = var.container_sg_description
   container_ingress_port   = var.container_ingress_port
-  vpc_id                   = module.vpc.vpc_id
 }
+
 
 module "alb" {
   source                    = "./modules/alb"
   alb_name                  = var.alb_name
-  alb_security_group_id     = module.security_groups.alb_sg_id
+  alb_security_group_id     = module.vpc.alb_sg_id
   alb_subnet_ids            = [module.vpc.public_subnet_1_id, module.vpc.public_subnet_2_id]
   target_group_name         = var.target_group_name
   target_group_port         = var.target_group_port
@@ -60,6 +56,7 @@ module "ecs" {
   service_name               = var.service_name
   desired_count              = var.desired_count
   private_subnet_ids         = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id]
-  container_security_group_id = module.security_groups.container_sg_id
+  container_security_group_id = module.vpc.container_sg_id
   target_group_arn           = module.alb.target_group_arn
+  depends_on = [module.alb]
 }
