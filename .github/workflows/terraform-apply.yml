@@ -23,11 +23,19 @@ jobs:
           aws s3 cp s3://threat-composer-project/terraform.tfvars terraform/
         working-directory: terraform
 
+      - name: Print terraform.tfvars
+        run: cat terraform.tfvars
+        working-directory: terraform
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -upgrade
+        working-directory: terraform
+
+      - name: Terraform Validate
+        run: terraform validate
         working-directory: terraform
 
       - name: Terraform Apply
