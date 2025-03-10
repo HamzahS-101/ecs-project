@@ -2,6 +2,9 @@ name: Build and Push Docker Image to ECR
 
 on:
   push:
+    paths: 
+      - 'app/**'
+      - 'Dockerfile'
     
 
 jobs:
