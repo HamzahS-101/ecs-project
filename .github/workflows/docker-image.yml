@@ -23,11 +23,9 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Login to Amazon ECR
-      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and tag Docker image
-      id: build-image
       run: |
         docker build -t ${{ secrets.ECR_REPOSITORY }}:latest -f Dockerfile ./app
         echo "IMAGE_TAG=${{ secrets.ECR_REPOSITORY }}:latest" >> $GITHUB_ENV
