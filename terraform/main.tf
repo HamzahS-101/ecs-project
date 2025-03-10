@@ -1,17 +1,13 @@
-provider "aws" {
-  region = var.region
-}
-
 module "vpc" {
-  source = "./modules/vpc"
-  vpc_cidr = var.vpc_cidr
+  source                   = "./modules/vpc"
+  vpc_cidr                 = var.vpc_cidr
   vpc_name = var.vpc_name
-  public_subnet_1_cidr = var.public_subnet_1_cidr
-  public_subnet_2_cidr = var.public_subnet_2_cidr
-  private_subnet_1_cidr = var.private_subnet_1_cidr
-  private_subnet_2_cidr = var.private_subnet_2_cidr
-  availability_zone_a = var.availability_zone_a
-  availability_zone_b = var.availability_zone_b
+  public_subnet_1_cidr     = var.public_subnet_1_cidr
+  public_subnet_2_cidr     = var.public_subnet_2_cidr
+  private_subnet_1_cidr    = var.private_subnet_1_cidr
+  private_subnet_2_cidr    = var.private_subnet_2_cidr
+  availability_zone_a      = var.availability_zone_a
+  availability_zone_b      = var.availability_zone_b
   alb_sg_name              = var.alb_sg_name
   alb_sg_description       = var.alb_sg_description
   container_sg_name        = var.container_sg_name
@@ -58,5 +54,5 @@ module "ecs" {
   private_subnet_ids         = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id]
   container_security_group_id = module.vpc.container_sg_id
   target_group_arn           = module.alb.target_group_arn
-  depends_on = [module.alb]
+  depends_on                 = [module.alb]
 }
