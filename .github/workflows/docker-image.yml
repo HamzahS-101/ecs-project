@@ -27,10 +27,10 @@ jobs:
       id: build-image
       run: |
         docker build -t ${{ secrets.ECR_REPOSITORY }}:latest -f Dockerfile ./app
-        echo "::set-output name=image::${{ secrets.ECR_REPOSITORY }}:latest"
+        echo "IMAGE_TAG=${{ secrets.ECR_REPOSITORY }}:latest" >> $GITHUB_ENV
         echo "Docker image built and tagged: ${{ secrets.ECR_REPOSITORY }}:latest"
 
     - name: Push Docker image to ECR
       run: |
-        docker push ${{ steps.build-image.outputs.image }}
-        echo "Docker image pushed to ECR: ${{ steps.build-image.outputs.image }}"
+        docker push ${{ env.IMAGE_TAG }}
+        echo "Docker image pushed to ECR: ${{ env.IMAGE_TAG }}"
