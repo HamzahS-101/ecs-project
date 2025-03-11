@@ -2,9 +2,7 @@ name: Build and Push Docker Image to ECR
 
 on:
   push:
-    paths: 
-      - 'app/**'
-      - 'Dockerfile'
+    
     
 
 jobs:
@@ -30,6 +28,14 @@ jobs:
         docker build -t ${{ secrets.ECR_REPOSITORY }}:latest -f Dockerfile ./app
         echo "IMAGE_TAG=${{ secrets.ECR_REPOSITORY }}:latest" >> $GITHUB_ENV
         echo "Docker image built and tagged: ${{ secrets.ECR_REPOSITORY }}:latest"
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: '${{ secrets.ECR_REPOSITORY }}:latest'
+        exit-code: '1'
+        format: 'table'
+        severity: 'CRITICAL,HIGH'
 
     - name: Push Docker image to ECR
       run: |
