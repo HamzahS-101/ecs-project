@@ -3,7 +3,14 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [var.alb_security_group_id]
   subnets            = var.alb_subnet_ids
+  enable_deletion_protection = true
+
+  access_logs {
+    bucket = var.bucket_name
+    enabled = true
+  }
 }
+
 
 resource "aws_lb_target_group" "target_group" {
   name        = var.target_group_name
@@ -33,7 +40,7 @@ resource "aws_lb_listener" "https_listener" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = var.acm_certificate_arn
 
   default_action {

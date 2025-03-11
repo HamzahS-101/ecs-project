@@ -26,6 +26,7 @@ module "alb" {
   target_group_protocol     = var.target_group_protocol
   vpc_id                    = module.vpc.vpc_id
   acm_certificate_arn       = module.route53.acm_certificate_arn
+  bucket_name               = var.bucket_name
 }
 
 module "route53" {
@@ -54,5 +55,4 @@ module "ecs" {
   private_subnet_ids         = [module.vpc.private_subnet_1_id, module.vpc.private_subnet_2_id]
   container_security_group_id = module.vpc.container_sg_id
   target_group_arn           = module.alb.target_group_arn
-  depends_on                 = [module.alb]
 }

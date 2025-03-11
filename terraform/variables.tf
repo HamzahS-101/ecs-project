@@ -181,5 +181,5 @@ variable "desired_count" {
 
 variable "bucket_name" {
     type      = string
-    description = "Name of bucket for remote state"
+    description = "Name of bucket for remote state and alb logs"
 }

@@ -1,5 +1,10 @@
 resource "aws_ecs_cluster" "cluster" {
   name = var.cluster_name
+
+  setting {
+    name = "containerInsights"
+    value = enabled
+  }
 }
 
 resource "aws_iam_role" "task_execution_role" {

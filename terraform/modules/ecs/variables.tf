@@ -77,3 +77,4 @@ variable "target_group_arn" {
   type        = string
   description = "ARN of the target group associated with the ECS service."
 }
+
