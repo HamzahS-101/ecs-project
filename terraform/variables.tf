@@ -177,9 +177,3 @@ variable "desired_count" {
   description = "Desired number of tasks to run in the ECS service."
 }
 
-# Backend
-
-variable "bucket_name" {
-    type      = string
-    description = "Name of bucket for remote state and alb logs"
-}
