@@ -26,7 +26,6 @@ module "alb" {
   target_group_protocol     = var.target_group_protocol
   vpc_id                    = module.vpc.vpc_id
   acm_certificate_arn       = module.route53.acm_certificate_arn
-  bucket_name               = var.bucket_name
 }
 
 module "route53" {

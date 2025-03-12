@@ -38,8 +38,5 @@ variable "acm_certificate_arn" {
   description = "ARN of the ACM certificate to be used with the Application Load Balancer."
 }
 
-variable "bucket_name" {
-  type = string
-  description = "Bucket name for alb logs"
-}
+
 
