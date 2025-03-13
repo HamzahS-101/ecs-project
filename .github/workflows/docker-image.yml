@@ -1,6 +1,7 @@
 name: Build and Push Docker Image to ECR
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'Dockerfile'
@@ -36,7 +37,6 @@ jobs:
       with:
         image-ref: '${{ secrets.ECR_REPOSITORY }}:latest'
         exit-code: '1'
-        ignore-unfixed: true
         format: 'table'
         severity: 'CRITICAL,HIGH'
 
