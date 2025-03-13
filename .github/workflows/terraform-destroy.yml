@@ -43,10 +43,6 @@ jobs:
         working-directory: terraform
         run: tflint -f compact
 
-      - name: Terraform Plan Destroy
-        working-directory: terraform
-        run: terraform plan -destroy -out=tfdestroyplan
-
       - name: Terraform Destroy
         working-directory: terraform
-        run: terraform destroy tfdestroyplan
+        run: terraform destroy -autoa-approve
