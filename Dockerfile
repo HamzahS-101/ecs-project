@@ -1,4 +1,4 @@
-FROM node:20-alpine AS build 
+FROM node:22-alpine AS build 
 
 WORKDIR /app
 
@@ -10,14 +10,14 @@ COPY . .
 
 RUN yarn build
 
-FROM node:20-alpine 
+FROM node:22-alpine 
 
 WORKDIR /app
 
 RUN yarn global add serve
 
-COPY --from=build /app /app
+COPY --from=build /app/build /app
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "."]
