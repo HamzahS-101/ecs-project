@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . .
 
-yarn build
+RUN yarn build
 
 FROM node:20-alpine 
 
